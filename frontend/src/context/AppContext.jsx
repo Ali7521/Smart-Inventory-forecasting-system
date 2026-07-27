@@ -9,6 +9,16 @@ export const AppProvider = ({ children }) => {
   const [alertsCount, setAlertsCount] = useState({ lowStock: 0, reorderSoon: 0 });
   const [settings, setSettings] = useState(null);
   const [isHowItWorksOpen, setIsHowItWorksOpen] = useState(false);
+  const [theme, setTheme] = useState(() => localStorage.getItem('inventory-theme') || 'light');
+
+  useEffect(() => {
+    localStorage.setItem('inventory-theme', theme);
+    document.documentElement.style.colorScheme = theme;
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((currentTheme) => currentTheme === 'light' ? 'dark' : 'light');
+  };
 
   useEffect(() => {
     if (user) {
@@ -55,7 +65,9 @@ export const AppProvider = ({ children }) => {
         fetchSettings,
         seedDatabase,
         isHowItWorksOpen,
-        setIsHowItWorksOpen
+        setIsHowItWorksOpen,
+        theme,
+        toggleTheme
       }}
     >
       {children}
