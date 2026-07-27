@@ -1,0 +1,21 @@
+{
+  "name": "smart-inventory-backend",
+  "version": "1.0.0",
+  "description": "Backend API for Smart Inventory Forecasting System",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "csv-parser": "^3.0.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb-memory-server": "^10.0.0",
+    "mongoose": "^8.5.2"
+  }
+}
