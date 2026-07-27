@@ -9,7 +9,9 @@ const connectDB = async () => {
 
     if (!uri) {
       console.log('No MONGODB_URI found in environment. Starting MongoDB Memory Server...');
-      mongoMemoryServer = await MongoMemoryServer.create();
+      mongoMemoryServer = await MongoMemoryServer.create({
+        instance: { ip: '127.0.0.1' }
+      });
       uri = mongoMemoryServer.getUri();
       console.log(`MongoDB Memory Server started at: ${uri}`);
     }
@@ -20,7 +22,9 @@ const connectDB = async () => {
     console.error(`MongoDB Connection Error: ${error.message}`);
     console.log('Attempting fallback to MongoDB Memory Server...');
     try {
-      mongoMemoryServer = await MongoMemoryServer.create();
+      mongoMemoryServer = await MongoMemoryServer.create({
+        instance: { ip: '127.0.0.1' }
+      });
       const fallbackUri = mongoMemoryServer.getUri();
       const conn = await mongoose.connect(fallbackUri);
       console.log(`MongoDB Memory Server Fallback Connected: ${conn.connection.host}`);
