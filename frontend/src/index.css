@@ -4,8 +4,13 @@
 
 @layer base {
   body {
-    @apply bg-slate-950 text-slate-100 antialiased selection:bg-sky-500 selection:text-white;
+    @apply bg-midnight-900 text-slate-100 antialiased selection:bg-neon-cyan selection:text-white min-h-screen relative;
     font-family: 'Inter', sans-serif;
+    /* Soft mesh gradient background */
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(11, 14, 20, 1) 0, transparent 50%), 
+      radial-gradient(at 50% 0%, rgba(21, 26, 35, 1) 0, transparent 50%), 
+      radial-gradient(at 100% 0%, rgba(11, 14, 20, 1) 0, transparent 50%);
   }
 }
 
@@ -15,29 +20,30 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #090d16;
+  background: #0B0E14;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #1E2532;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #2A3441;
 }
 
 /* Glassmorphism utility */
 .glass-panel {
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(21, 26, 35, 0.65);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
 
 .glass-card {
-  background: rgba(30, 41, 59, 0.5);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(30, 37, 50, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 .gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-indigo-300 to-purple-400;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-neon-cyan via-indigo-300 to-neon-purple;
 }

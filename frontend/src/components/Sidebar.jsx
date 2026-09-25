@@ -30,7 +30,7 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside className="w-64 border-r border-slate-800 bg-slate-950 p-4 flex flex-col justify-between hidden md:flex min-h-[calc(100vh-4rem)]">
+    <aside className="w-64 border-r border-white/5 bg-midnight-900/40 backdrop-blur-sm p-4 flex flex-col justify-between hidden md:flex min-h-[calc(100vh-4rem)]">
       <div className="space-y-1">
         <p className="px-3 text-[11px] font-semibold tracking-wider text-slate-500 uppercase mb-2">Main Navigation</p>
         {navItems.map((item) => {
@@ -42,8 +42,8 @@ export default function Sidebar() {
               className={({ isActive }) =>
                 `flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
                   isActive
-                    ? 'bg-sky-500/10 text-sky-400 border border-sky-500/20 shadow-sm'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+                    ? 'bg-neon-cyan/10 text-neon-cyan border border-neon-cyan/30 shadow-glow-cyan'
+                    : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
                 }`
               }
             >
@@ -63,9 +63,9 @@ export default function Sidebar() {
       </div>
 
       {/* Footer Info */}
-      <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-xs text-slate-400 space-y-1">
+      <div className="p-3 rounded-xl bg-midnight-800/60 border border-white/5 text-xs text-slate-400 space-y-1">
         <div className="flex items-center gap-1.5 text-slate-300 font-medium">
-          <TrendingUp className="w-3.5 h-3.5 text-sky-400" />
+          <TrendingUp className="w-3.5 h-3.5 text-neon-cyan" />
           <span>Stat Model: WMA/LR</span>
         </div>
         <p className="text-[11px] text-slate-500">Auto Safety Stock Buffer active</p>

@@ -24,7 +24,7 @@ function ProtectedLayout() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center text-xs text-sky-400">
+      <div className="min-h-screen bg-transparent flex items-center justify-center text-xs text-neon-cyan">
         Loading...
       </div>
     );
@@ -35,7 +35,7 @@ function ProtectedLayout() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
+    <div className="min-h-screen bg-transparent text-slate-100 flex flex-col">
       <Navbar />
       <div className="flex flex-1">
         <Sidebar />

@@ -42,7 +42,7 @@ router.get('/:id', protect, async (req, res) => {
 // @route POST /api/products
 router.post('/', protect, adminOnly, async (req, res) => {
   try {
-    const { name, sku, category, currentStock, unitCost, sellingPrice, reorderThreshold, safetyStock } = req.body;
+    const { name, sku, category, currentStock, unitCost, sellingPrice, reorderThreshold, safetyStock, leadTimeDays } = req.body;
     
     if (!name || !sku) {
       return res.status(400).json({ message: 'Product name and SKU are required' });
@@ -61,7 +61,8 @@ router.post('/', protect, adminOnly, async (req, res) => {
       unitCost: Number(unitCost) || 0,
       sellingPrice: Number(sellingPrice) || 0,
       reorderThreshold: Number(reorderThreshold) || 10,
-      safetyStock: Number(safetyStock) || 5
+      safetyStock: Number(safetyStock) || 5,
+      leadTimeDays: Math.max(1, Number(leadTimeDays) || 7)
     });
 
     // Log initial stock adjustment if currentStock > 0
@@ -87,7 +88,7 @@ router.put('/:id', protect, adminOnly, async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (!product) return res.status(404).json({ message: 'Product not found' });
 
-    const { name, category, unitCost, sellingPrice, reorderThreshold, safetyStock } = req.body;
+    const { name, category, unitCost, sellingPrice, reorderThreshold, safetyStock, leadTimeDays } = req.body;
     
     if (name) product.name = name;
     if (category) product.category = category;
@@ -95,6 +96,7 @@ router.put('/:id', protect, adminOnly, async (req, res) => {
     if (sellingPrice !== undefined) product.sellingPrice = Number(sellingPrice);
     if (reorderThreshold !== undefined) product.reorderThreshold = Number(reorderThreshold);
     if (safetyStock !== undefined) product.safetyStock = Number(safetyStock);
+    if (leadTimeDays !== undefined) product.leadTimeDays = Math.max(1, Number(leadTimeDays));
 
     const updated = await product.save();
     res.json(updated);
@@ -180,7 +182,8 @@ router.post('/import-csv', protect, adminOnly, async (req, res) => {
         unitCost: Number(item.unitCost) || 0,
         sellingPrice: Number(item.sellingPrice) || Number(item.unitCost) * 1.5 || 0,
         reorderThreshold: Number(item.reorderThreshold) || 10,
-        safetyStock: Number(item.safetyStock) || 5
+        safetyStock: Number(item.safetyStock) || 5,
+        leadTimeDays: Math.max(1, Number(item.leadTimeDays) || 7)
       });
 
       if (product.currentStock > 0) {

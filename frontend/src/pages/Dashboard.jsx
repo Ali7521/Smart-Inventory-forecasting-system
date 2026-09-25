@@ -117,10 +117,10 @@ export default function Dashboard() {
   return (
     <div className="space-y-6 pb-12">
       {/* Top Banner / Onboarding Checklist */}
-      <div className="glass-panel p-6 rounded-3xl border border-slate-800 bg-gradient-to-r from-slate-900 via-slate-900/90 to-sky-950/40 relative overflow-hidden">
+      <div className="glass-panel p-6 rounded-3xl border border-white/5 bg-gradient-to-r from-midnight-800 via-midnight-800/90 to-neon-cyan/10 relative overflow-hidden shadow-2xl">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
           <div className="space-y-1">
-            <div className="flex items-center gap-2 text-sky-400 text-xs font-semibold uppercase tracking-wider">
+            <div className="flex items-center gap-2 text-neon-cyan text-xs font-semibold uppercase tracking-wider">
               <Sparkles className="w-4 h-4" />
               <span>Smart Inventory System Overview</span>
             </div>
@@ -132,7 +132,7 @@ export default function Dashboard() {
 
           <button
             onClick={() => setIsHowItWorksOpen(true)}
-            className="self-start md:self-auto px-4 py-2.5 rounded-xl bg-sky-500/10 border border-sky-500/30 text-sky-400 hover:bg-sky-500/20 text-xs font-semibold transition-all flex items-center gap-2"
+            className="self-start md:self-auto px-4 py-2.5 rounded-xl bg-neon-cyan/10 border border-neon-cyan/30 text-neon-cyan hover:bg-neon-cyan/20 hover:-translate-y-0.5 hover:shadow-glow-cyan text-xs font-semibold transition-all flex items-center gap-2"
           >
             <Info className="w-4 h-4" />
             <span>How Forecasting Works</span>
@@ -175,13 +175,13 @@ export default function Dashboard() {
       {/* Charts Row */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Sales Trend Chart */}
-        <div className="glass-panel p-5 rounded-2xl border border-slate-800 space-y-4">
+        <div className="glass-panel p-5 rounded-2xl border border-white/5 space-y-4 hover:border-white/10 transition-colors">
           <div className="flex items-center justify-between">
             <div>
               <h3 className="font-bold text-slate-100 text-sm">Overall Sales Volume Trend</h3>
               <p className="text-[11px] text-slate-400">Daily units sold over past 3 weeks</p>
             </div>
-            <div className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-[11px] text-slate-300 font-medium">
+            <div className="px-2.5 py-1 rounded-lg bg-midnight-800 border border-white/5 text-[11px] text-slate-300 font-medium">
               Daily Aggregate
             </div>
           </div>
@@ -192,17 +192,17 @@ export default function Dashboard() {
                 <AreaChart data={salesTrend}>
                   <defs>
                     <linearGradient id="salesGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#0284c7" stopOpacity={0.4} />
-                      <stop offset="95%" stopColor="#0284c7" stopOpacity={0} />
+                      <stop offset="5%" stopColor="#06b6d4" stopOpacity={0.6} />
+                      <stop offset="95%" stopColor="#06b6d4" stopOpacity={0} />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#1E2532" />
                   <XAxis dataKey="date" stroke="#64748b" fontSize={11} />
                   <YAxis stroke="#64748b" fontSize={11} />
                   <Tooltip
-                    contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', borderRadius: '12px', fontSize: '12px' }}
+                    contentStyle={{ backgroundColor: '#0B0E14', borderColor: '#1E2532', borderRadius: '12px', fontSize: '12px' }}
                   />
-                  <Area type="monotone" dataKey="sales" stroke="#38bdf8" strokeWidth={2} fillOpacity={1} fill="url(#salesGrad)" />
+                  <Area type="monotone" dataKey="sales" stroke="#06b6d4" strokeWidth={3} fillOpacity={1} fill="url(#salesGrad)" />
                 </AreaChart>
               </ResponsiveContainer>
             ) : (
@@ -212,7 +212,7 @@ export default function Dashboard() {
         </div>
 
         {/* Forecast vs Current Stock Chart */}
-        <div className="glass-panel p-5 rounded-2xl border border-slate-800 space-y-4">
+        <div className="glass-panel p-5 rounded-2xl border border-white/5 space-y-4 hover:border-white/10 transition-colors">
           <div className="flex items-center justify-between">
             <div>
               <h3 className="font-bold text-slate-100 text-sm">Forecasted Demand vs Current Stock</h3>
@@ -224,14 +224,15 @@ export default function Dashboard() {
             {forecastComparison.length > 0 ? (
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={forecastComparison}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#1E2532" />
                   <XAxis dataKey="name" stroke="#64748b" fontSize={10} />
                   <YAxis stroke="#64748b" fontSize={11} />
                   <Tooltip
-                    contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', borderRadius: '12px', fontSize: '12px' }}
+                    contentStyle={{ backgroundColor: '#0B0E14', borderColor: '#1E2532', borderRadius: '12px', fontSize: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.5)' }}
+                    cursor={{ fill: 'rgba(255,255,255,0.05)' }}
                   />
                   <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '10px' }} />
-                  <Bar dataKey="currentStock" name="Current Stock" fill="#38bdf8" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="currentStock" name="Current Stock" fill="#06b6d4" radius={[4, 4, 0, 0]} />
                   <Bar dataKey="predictedDemand" name="14-Day Demand" fill="#a855f7" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
@@ -243,11 +244,11 @@ export default function Dashboard() {
       </div>
 
       {/* Reorder Alerts Table */}
-      <div className="glass-panel p-5 rounded-2xl border border-slate-800 space-y-4">
+      <div className="glass-panel p-5 rounded-2xl border border-white/5 space-y-4">
         <div className="flex items-center justify-between">
           <div>
             <h3 className="font-bold text-slate-100 text-sm flex items-center gap-2">
-              <AlertTriangle className="w-4 h-4 text-amber-400" />
+              <AlertTriangle className="w-4 h-4 text-amber-400 drop-shadow-md" />
               Reorder Recommendations & Status
             </h3>
             <p className="text-[11px] text-slate-400">Products requiring attention based on forecasted sales velocity</p>
@@ -257,7 +258,7 @@ export default function Dashboard() {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="border-b border-slate-800 text-slate-400 font-semibold uppercase text-[10px] tracking-wider">
+              <tr className="border-b border-white/5 text-slate-400 font-semibold uppercase text-[10px] tracking-wider">
                 <th className="py-3 px-3">Product / SKU</th>
                 <th className="py-3 px-3">Category</th>
                 <th className="py-3 px-3 text-center">In-Stock</th>
@@ -268,32 +269,32 @@ export default function Dashboard() {
                 <th className="py-3 px-3 text-right">Quick Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/60 text-slate-200">
+            <tbody className="divide-y divide-white/5 text-slate-200">
               {alerts.slice(0, 7).map((item) => (
-                <tr key={item.productId} className="hover:bg-slate-900/50 transition-colors">
+                <tr key={item.productId} className="hover:bg-white/[0.02] transition-colors group">
                   <td className="py-3 px-3">
                     <div className="font-semibold text-slate-100">{item.name}</div>
                     <div className="text-[10px] text-slate-500 font-mono">{item.sku}</div>
                   </td>
                   <td className="py-3 px-3 text-slate-400">{item.category}</td>
                   <td className="py-3 px-3 text-center font-bold text-slate-100">{item.currentStock}</td>
-                  <td className="py-3 px-3 text-center font-semibold text-indigo-400">{item.predictedDemand} units</td>
-                  <td className="py-3 px-3 text-center font-bold text-sky-400">
+                  <td className="py-3 px-3 text-center font-semibold text-neon-purple">{item.predictedDemand} units</td>
+                  <td className="py-3 px-3 text-center font-bold text-neon-cyan drop-shadow-sm">
                     {item.suggestedReorderQty > 0 ? `+${item.suggestedReorderQty}` : '0'}
                   </td>
                   <td className="py-3 px-3 text-center">
                     <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${
-                      item.confidenceLabel === 'High' ? 'bg-emerald-500/20 text-emerald-300' :
-                      item.confidenceLabel === 'Medium' ? 'bg-sky-500/20 text-sky-300' : 'bg-amber-500/20 text-amber-300'
+                      item.confidenceLabel === 'High' ? 'bg-emerald-500/20 text-emerald-400' :
+                      item.confidenceLabel === 'Medium' ? 'bg-neon-cyan/20 text-neon-cyan' : 'bg-amber-500/20 text-amber-400'
                     }`}>
                       {item.confidenceScore}% ({item.confidenceLabel})
                     </span>
                   </td>
                   <td className="py-3 px-3 text-center">
-                    <span className={`text-[10px] px-2.5 py-1 rounded-full font-bold uppercase ${
-                      item.status === 'Low Stock' ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30' :
-                      item.status === 'Reorder Soon' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' :
-                      'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                    <span className={`text-[10px] px-2.5 py-1 rounded-full font-bold uppercase transition-shadow ${
+                      item.status === 'Low Stock' ? 'bg-rose-500/20 text-rose-400 border border-rose-500/40 shadow-glow-rose' :
+                      item.status === 'Reorder Soon' ? 'bg-amber-500/20 text-amber-400 border border-amber-500/40 shadow-glow-amber' :
+                      'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 shadow-glow-emerald'
                     }`}>
                       {item.status}
                     </span>
@@ -303,7 +304,7 @@ export default function Dashboard() {
                       <button
                         onClick={() => handleMarkOrdered(item.productId)}
                         disabled={orderingId === item.productId}
-                        className="px-3 py-1.5 rounded-lg bg-sky-500 hover:bg-sky-600 disabled:opacity-50 text-white font-medium text-[11px] shadow-sm transition-all"
+                        className="px-3 py-1.5 rounded-lg bg-neon-cyan hover:bg-cyan-400 disabled:opacity-50 text-midnight-900 font-bold text-[11px] shadow-glow-cyan transition-all hover:-translate-y-0.5 opacity-0 group-hover:opacity-100"
                       >
                         {orderingId === item.productId ? 'Restocking...' : 'Mark as Ordered'}
                       </button>
