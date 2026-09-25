@@ -81,7 +81,7 @@ smart-inventory-forecasting/
 ```bash
 cd backend
 npm install
-npm run dev # Starts server on port 5001 with auto MongoDB Memory Server fallback & auto mock data seeding
+npm run dev # Starts server on port 5000 with auto MongoDB Memory Server fallback & auto mock data seeding
 ```
 
 ### 2. Start Frontend App
