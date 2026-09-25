@@ -47,6 +47,12 @@ const productSchema = new mongoose.Schema({
     required: true,
     default: 5,
     min: 0
+  },
+  leadTimeDays: {
+    type: Number,
+    required: true,
+    default: 7,
+    min: 1
   }
 }, { timestamps: true });
 

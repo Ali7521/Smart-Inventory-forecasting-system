@@ -10,7 +10,18 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors());
+const frontendOrigins = (process.env.FRONTEND_ORIGINS || 'http://localhost:3000,http://localhost:5173')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+app.use(cors({
+  origin(origin, callback) {
+    // Server-to-server calls and configured frontend origins are allowed.
+    if (!origin || frontendOrigins.includes(origin)) return callback(null, true);
+    return callback(new Error('Origin is not allowed by CORS'));
+  },
+  credentials: true
+}));
 app.use(express.json());
 
 // Routes
@@ -18,6 +29,8 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/products', require('./routes/products'));
 app.use('/api/sales', require('./routes/sales'));
 app.use('/api/forecast', require('./routes/forecast'));
+app.use('/api/inventory', require('./routes/inventory'));
+app.use('/api/replenishment', require('./routes/replenishment'));
 app.use('/api/alerts', require('./routes/alerts'));
 app.use('/api/reports', require('./routes/reports'));
 app.use('/api/settings', require('./routes/settings'));
